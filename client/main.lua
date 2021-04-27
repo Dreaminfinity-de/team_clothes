@@ -1,0 +1,54 @@
+ESX = nil
+
+Citizen.CreateThread(function()
+	while ESX == nil do
+		TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+		Citizen.Wait(0)
+	end
+end)
+
+RegisterNetEvent("support:changeSkin")
+AddEventHandler("support:changeSkin", function()
+    changeSkin_func()
+end)
+
+
+local offduty = nil
+
+
+function changeSkin_func()
+	if offduty == nil then
+		TriggerEvent('skinchanger:getSkin', function(skin)
+		
+			if skin.sex == 0 then
+				TriggerEvent('skinchanger:loadClothes', skin, Config.skin.male)
+				ESX.ShowNotification(_U('skin_onduty'))
+				offduty = skin
+			elseif skin.sex == 1 then
+				TriggerEvent('skinchanger:loadClothes', skin, Config.skin.female)
+				ESX.ShowNotification(_U('skin_onduty'))
+				offduty = skin
+			else
+				ESX.ShowNotification('~r~ Error - Sex undefinied!!!')
+			end
+		
+		end)
+	
+	else
+		TriggerEvent('skinchanger:getSkin', function(skin)
+		
+			if skin.sex == 0 then
+				TriggerEvent('skinchanger:loadClothes', skin, offduty)
+				ESX.ShowNotification(_U('skin_offduty'))
+				offduty = nil
+			elseif skin.sex == 1 then
+				TriggerEvent('skinchanger:loadClothes', skin, offduty)
+				ESX.ShowNotification(_U('skin_offduty'))
+				offduty = nil
+			else
+				ESX.ShowNotification('~r~ Error - Sex undefinied!!!')
+			end
+		
+		end)
+	end
+end
