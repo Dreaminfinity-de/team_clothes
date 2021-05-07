@@ -2,7 +2,7 @@ ESX = nil
 
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
-RegisterCommand("support", function(source)
+RegisterCommand("admin", function(source)
 
 	local xPlayer = ESX.GetPlayerFromId(source)
 	
