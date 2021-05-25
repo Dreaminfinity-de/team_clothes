@@ -19,7 +19,7 @@ local offduty = nil
 function changeSkin_func()
 	if offduty == nil then
 		TriggerEvent('skinchanger:getSkin', function(skin)
-		
+			SetEntityProofs(GetPlayerPed(-1), true, true, true, true, true, true, true, true)
 			if skin.sex == 0 then
 				TriggerEvent('skinchanger:loadClothes', skin, Config.skin.male)
 				ESX.ShowNotification(_U('skin_onduty'))
@@ -36,7 +36,7 @@ function changeSkin_func()
 	
 	else
 		TriggerEvent('skinchanger:getSkin', function(skin)
-		
+			SetEntityProofs(GetPlayerPed(-1), false, false, false, false, false, false, false, false)
 			if skin.sex == 0 then
 				TriggerEvent('skinchanger:loadClothes', skin, offduty)
 				ESX.ShowNotification(_U('skin_offduty'))
