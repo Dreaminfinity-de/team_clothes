@@ -7,25 +7,26 @@ Citizen.CreateThread(function()
 	end
 end)
 
-RegisterNetEvent("support:changeSkin")
-AddEventHandler("support:changeSkin", function()
-    changeSkin_func()
+RegisterNetEvent("team_clothes:changeSkin")
+AddEventHandler("team_clothes:changeSkin", function(group)
+
+    changeSkin_func(group)
 end)
 
 
 local offduty = nil
 
 
-function changeSkin_func()
+function changeSkin_func(group)
 	if offduty == nil then
 		TriggerEvent('skinchanger:getSkin', function(skin)
 			SetEntityProofs(GetPlayerPed(-1), true, true, true, true, true, true, true, true)
 			if skin.sex == 0 then
-				TriggerEvent('skinchanger:loadClothes', skin, Config.skin.male)
+				TriggerEvent('skinchanger:loadClothes', skin, Config.skins[group].male)
 				ESX.ShowNotification(_U('skin_onduty'))
 				offduty = skin
 			elseif skin.sex == 1 then
-				TriggerEvent('skinchanger:loadClothes', skin, Config.skin.female)
+				TriggerEvent('skinchanger:loadClothes', skin, Config.skins[group].female)
 				ESX.ShowNotification(_U('skin_onduty'))
 				offduty = skin
 			else

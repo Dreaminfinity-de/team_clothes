@@ -2,9 +2,9 @@ fx_version 'adamant'
 
 game 'gta5'
 
-description 'Supportbefehl by Grewo  -  Admin-Kleidung über Befehl.'
+description 'Teamcommand by Grewo  -  Change Team-Clothes with command.'
 
-version '1.0.0'
+version '1.1.0'
 
 server_scripts {
 	'@mysql-async/lib/MySQL.lua',
