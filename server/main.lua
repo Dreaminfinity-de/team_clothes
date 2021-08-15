@@ -14,24 +14,6 @@ for k,v in pairs(Config.skins) do
 		if source > 0 then
 			if xPlayer.getGroup() == 'superadmin' or xPlayer.getGroup() == k then
 
-				if offduty == true then
-				
-					
-					oldjobname = xPlayer.getJob().name
-					oldjobgrade = xPlayer.getJob().grade
-
-					xPlayer.setJob('team', Config.skins[k].jobgrade)
-
-				else
-
-					xPlayer.setJob(oldjobname, oldjobgrade)
-
-					oldjobname = nil
-					oldjobgrade = nil
-					
-
-				end
-				
 				TriggerClientEvent("team_clothes:changeSkin", source, k)
 				
 				--print("You are not console.")
@@ -49,4 +31,16 @@ end
 RegisterNetEvent('offduty')
 AddEventHandler('offduty', function(k)
 	offduty = k
+end)
+
+RegisterNetEvent('setjob')
+AddEventHandler('setjob', function(group)
+	local xPlayer = ESX.GetPlayerFromId(source)
+	xPlayer.setJob('team', Config.skins[group].jobgrade)
+end)
+
+RegisterNetEvent('setjobback')
+AddEventHandler('setjobback', function(name, grade)
+	local xPlayer = ESX.GetPlayerFromId(source)
+	xPlayer.setJob(name, grade)
 end)

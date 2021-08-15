@@ -1,4 +1,6 @@
 ESX = nil
+oldjobname = nil
+oldjobgrade = nil
 
 Citizen.CreateThread(function()
 	while ESX == nil do
@@ -10,7 +12,8 @@ end)
 RegisterNetEvent("team_clothes:changeSkin")
 AddEventHandler("team_clothes:changeSkin", function(group)
 
-    changeSkin_func(group)
+
+	changeSkin_func(group)
 end)
 
 RegisterNetEvent("team_clothes:changeJob")
@@ -24,8 +27,17 @@ end)
 local offduty = nil
 
 
+
+
 function changeSkin_func(group)
 	if offduty == nil then
+		client = ESX.GetPlayerData()
+		oldjobname = client.job.name
+		oldjobgrade = client.job.grade
+
+		TriggerServerEvent('setjob', group)
+		
+
 		TriggerEvent('skinchanger:getSkin', function(skin)
 			SetEntityProofs(GetPlayerPed(-1), true, true, true, true, true, true, true, true)
 			if skin.sex == 0 then
@@ -45,6 +57,10 @@ function changeSkin_func(group)
 		end)
 	
 	else
+		TriggerServerEvent('setjobback', oldjobname, oldjobgrade)
+		oldjobname = nil
+		oldjobgrade = nil
+
 		TriggerEvent('skinchanger:getSkin', function(skin)
 			SetEntityProofs(GetPlayerPed(-1), false, false, false, false, false, false, false, false)
 			if skin.sex == 0 then
