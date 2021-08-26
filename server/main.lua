@@ -17,7 +17,6 @@ end)
 
 
 for k,v in pairs(Config.skins) do
-	command = k
 	RegisterCommand(k, function(source)
 
 		local xPlayer = ESX.GetPlayerFromId(source)
@@ -27,7 +26,7 @@ for k,v in pairs(Config.skins) do
 			if isOnduty(source) then
 				setOffduty(source)
 			else
-				if xPlayer.getGroup() == 'superadmin' or xPlayer.getGroup() == command then
+				if xPlayer.getGroup() == 'superadmin' or xPlayer.getGroup() == k then
 					setOnduty(source, k)
 				else
 					xPlayer.showNotification(_U('command_denied'))
