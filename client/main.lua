@@ -23,6 +23,7 @@ AddEventHandler('team_clothes:setOnduty', function(group)
 				Citizen.Wait(0)
 				SetEntityInvincible(playerPed, true)
 			end
+			SetEntityInvincible(playerPed, false)
 		end)
 
 		if skin.sex == 0 then
@@ -40,5 +41,4 @@ RegisterNetEvent('team_clothes:setOffduty')
 AddEventHandler('team_clothes:setOffduty', function(group)
 	onduty = false
 	playerPed = GetPlayerPed(-1)
-	SetEntityInvincible(playerPed, false)
 end)
