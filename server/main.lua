@@ -46,6 +46,11 @@ AddEventHandler('onResourceStop', function(resourceName)
 	end
 end)
 
+AddEventHandler('playerDropped', function (reason)
+	print("'team_clothes' Player " .. GetPlayerName(source) .. ' dropped (Reason: ' .. reason .. ')')
+	setOffduty(source)
+end)
+
 
 
 function isOnduty(playerid)
