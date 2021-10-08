@@ -47,7 +47,7 @@ AddEventHandler('onResourceStop', function(resourceName)
 end)
 
 AddEventHandler('playerDropped', function (reason)
-	print("'team_clothes' Player " .. GetPlayerName(source) .. ' dropped (Reason: ' .. reason .. ')')
+	print('Player "' .. GetPlayerName(source) .. '"(' .. source .. ') dropped (Reason: ' .. reason .. ')')
 	setOffduty(source)
 end)
 
@@ -59,10 +59,12 @@ end
 
 function setOffduty(source)
 	local xPlayer = ESX.GetPlayerFromId(source)
-	xPlayer.setJob(onduty[source].job, onduty[source].grade)
-	TriggerClientEvent('skinchanger:loadClothes', source, onduty[source].skin, onduty[source].skin)
-	onduty[source] = nil
-	TriggerClientEvent("team_clothes:setOffduty", source)
+	if onduty[source] ~= nil then
+		xPlayer.setJob(onduty[source].job, onduty[source].grade)
+		TriggerClientEvent('skinchanger:loadClothes', source, onduty[source].skin, onduty[source].skin)
+		onduty[source] = nil
+		TriggerClientEvent("team_clothes:setOffduty", source)
+	end
 
 	xPlayer.showNotification(_U('skin_offduty'))
 end
